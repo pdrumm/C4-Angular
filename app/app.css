@@ -23,3 +23,44 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+/*
+Connect 4 Board
+
+Super useful resource:
+- https://internetingishard.com/html-and-css/flexbox/
+*/
+
+c4-board {
+  height: 300px;
+  width: 350px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+c4-row {
+  width: 100%;
+  flex: 1;
+
+  display: flex;
+}
+
+c4-grid {
+  height: 100%;
+  flex: 1;
+
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+}
+
+c4-disc {
+  flex: .7;
+  width: 70%;
+  margin: auto;
+
+  border: solid 1px blue;
+  border-radius: 100%;
+}
