@@ -18,7 +18,7 @@
 
 <body>
   <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
+    <li><a href="#!/connect4">Connect 4</a></li>
     <li><a href="#!/view2">view2</a></li>
   </ul>
 
@@ -33,14 +33,24 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+
+  <!-- Used for JavaScript animations (include this before angular.js) -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+
+  <!--Client-side dependencies-->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-aria/angular-aria.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-material/angular-material.js"></script>
-  <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
+
+  <!--Internal application dependencies-->
+  <script src="app.module.js"></script>
+  <script src="app.config.js"></script>
   <script src="view2/view2.js"></script>
+  <script src="connect-4/connect-4.module.js"></script>
+  <script src="connect-4/connect-4.component.js"></script>
+  <script src="connect-4/connect-4.animate.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

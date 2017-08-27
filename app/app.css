@@ -31,7 +31,7 @@ Super useful resource:
 - https://internetingishard.com/html-and-css/flexbox/
 */
 
-c4-board {
+.c4-board {
   height: 300px;
   width: 350px;
   margin: auto;
@@ -40,7 +40,7 @@ c4-board {
   flex-direction: row;
 }
 
-c4-col {
+.c4-col {
   width: 100%;
   flex: 1;
 
@@ -48,7 +48,7 @@ c4-col {
   flex-direction: column;
 }
 
-c4-grid {
+.c4-grid {
   height: 100%;
   flex: 1;
 
@@ -57,7 +57,7 @@ c4-grid {
   flex-direction: column;
 }
 
-c4-disc {
+.c4-disc {
   flex: .7;
   width: 70%;
   margin: auto;

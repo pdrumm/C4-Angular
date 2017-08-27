@@ -1,0 +1,17 @@
+<div class="c4-board">
+
+  <div class="c4-col"
+       ng-repeat="col in $ctrl.board track by $index"
+       ng-click="$ctrl.dropDiscInCol(col)"
+       ng-mouseenter="$ctrl.highlightAvailableDiscInCol(col)"
+       ng-mouseleave="$ctrl.removeHighlightsFromCol(col)">
+
+    <div class="c4-grid"
+         ng-repeat="disc in col track by $index">
+
+      <div class="c4-disc"
+           ng-class="{'disc-hover': disc.isHighlighted, 'disc-player': disc.token === $ctrl.player}"></div>
+
+    </div>
+  </div>
+</div>
