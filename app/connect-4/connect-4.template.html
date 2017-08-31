@@ -1,17 +1,25 @@
 <div class="c4-board">
 
   <div class="c4-col"
-       ng-repeat="col in $ctrl.board track by $index"
-       ng-click="$ctrl.dropDiscInCol(col)"
-       ng-mouseenter="$ctrl.highlightAvailableDiscInCol(col)"
-       ng-mouseleave="$ctrl.removeHighlightsFromCol(col)">
+       ng-repeat="(colIdx, col) in $ctrl.board track by $index"
+       ng-click="$ctrl.dropDiscInCol(colIdx)"
+       ng-mouseenter="$ctrl.highlightAvailableDiscInCol(colIdx)"
+       ng-mouseleave="$ctrl.removeHighlightsFromCol(colIdx)">
 
     <div class="c4-grid"
-         ng-repeat="disc in col track by $index">
+         ng-repeat="(rowIdx, disc) in col track by $index">
 
-      <div class="c4-disc"
-           ng-class="{'disc-hover': disc.isHighlighted, 'disc-player': disc.token === $ctrl.playerToken}"></div>
+      <div class="c4-disc-wrapper">
+        <div class="c4-disc"
+             ng-class="{
+               'disc-player': disc.token === $ctrl.playerToken,
+               'disc-opponent': disc.token === $ctrl.opponentToken,
+               'disc-hover-player': disc.isHighlighted && $ctrl.currentPlayerToken === $ctrl.playerToken,
+               'disc-hover-opponent': disc.isHighlighted && $ctrl.currentPlayerToken === $ctrl.opponentToken
+             }"></div>
+      </div>
 
     </div>
   </div>
 </div>
+<p>{{$ctrl.currentPlayerToken}}</p>

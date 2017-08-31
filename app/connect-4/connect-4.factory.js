@@ -11,8 +11,8 @@ function connect4Factory() {
    * Instantiate the Connect 4 Board
    */
   self.emptyToken = '.';
-  self.playerToken = '1';
-  self.opponentToken = '2';
+  self.playerTokens = [];
+  self.playerTurn = 0;
   self.width = null;
   self.height = null;
   self.board = null;
@@ -31,14 +31,31 @@ function connect4Factory() {
     return board;
   }
 
+  function findNextAvailableDiscInCol(colIdx) {
+    let rowIdx = self.height - 1;
+    for (; rowIdx >= 0; --rowIdx) {
+      if (self.board[colIdx][rowIdx].token === self.emptyToken) {
+        break;
+      }
+    }
+    return rowIdx;
+  }
+
+  function removeHighlightsFromCol (colIdx) {
+    self.board[colIdx].forEach( (disc) => {
+      disc.isHighlighted = false;
+    });
+  }
+
   /*
    * Create factory object
    */
   return {
-    init : (width, height) => {
+    init : (width, height, playerTokens) => {
       self.width = width;
       self.height = height;
       self.board = createBoard(width, height);
+      self.playerTokens = playerTokens.slice();
     },
 
     getBoard : () => {
@@ -49,8 +66,33 @@ function connect4Factory() {
       return self.emptyToken;
     },
 
-    getPlayerToken : () => {
-      return self.playerToken;
+    getPlayerTurn : () => {
+      return self.playerTurn;
+    },
+
+    getPlayerTokens : () => {
+      return self.playerTokens;
+    },
+
+    getCurrentPlayerToken : () => {
+      return self.playerTokens[self.playerTurn];
+    },
+
+    dropDiscInCol : (colIdx) => {
+      const rowIdx = findNextAvailableDiscInCol(colIdx);
+      self.board[colIdx][rowIdx].token = self.playerTokens[self.playerTurn];
+      self.playerTurn = ++self.playerTurn % self.playerTokens.length;
+      removeHighlightsFromCol(colIdx);
+    },
+
+    highlightAvailableDiscInCol : (colIdx) => {
+      const rowIdx = findNextAvailableDiscInCol(colIdx);
+      self.board[colIdx][rowIdx].isHighlighted = true;
+    },
+
+    removeHighlightsFromCol : (colIdx) => {
+      removeHighlightsFromCol(colIdx);
     }
+
   }
 }

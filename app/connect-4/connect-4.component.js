@@ -12,40 +12,30 @@ Connect4Controller.$inject = ['connect4Factory'];
 function Connect4Controller(connect4Factory) {
   let self = this;
 
+  self.playerToken = '1';
+  self.opponentToken = '2';
   const width = 7,
-      height = 6;
-  connect4Factory.init(width, height);
+      height = 6,
+      playerTokens = [self.playerToken, self.opponentToken];
+  connect4Factory.init(width, height, playerTokens);
   self.board = connect4Factory.getBoard();
-  self.playerToken = connect4Factory.getPlayerToken();
+  self.currentPlayerToken = connect4Factory.getCurrentPlayerToken();
   self.emptyToken = connect4Factory.getEmptyToken();
 
   /*
-   * Define event helpers
+   * Define event handlers
    */
-  function findNextAvailableDiscInCol(col) {
-    let rowIdx = col.length - 1;
-    for (; rowIdx >= 0; --rowIdx) {
-      if (col[rowIdx].token === self.emptyToken) {
-        break;
-      }
-    }
-    return rowIdx;
-  }
-
-  self.dropDiscInCol = (col) => {
-    const rowIdx = findNextAvailableDiscInCol(col);
-    col[rowIdx].token = self.playerToken;
+  self.dropDiscInCol = (colIdx) => {
+    connect4Factory.dropDiscInCol(colIdx);
+    self.currentPlayerToken = connect4Factory.getCurrentPlayerToken();
   };
 
-  self.highlightAvailableDiscInCol = (col) => {
-    const rowIdx = findNextAvailableDiscInCol(col);
-    col[rowIdx].isHighlighted = true;
+  self.highlightAvailableDiscInCol = (colIdx) => {
+    connect4Factory.highlightAvailableDiscInCol(colIdx);
   };
 
-  self.removeHighlightsFromCol = (col) => {
-    col.forEach( (disc) => {
-      disc.isHighlighted = false;
-    });
+  self.removeHighlightsFromCol = (colIdx) => {
+    connect4Factory.removeHighlightsFromCol(colIdx);
   };
 
 }
